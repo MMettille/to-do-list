@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>To Do List</title>
     <script src="./vendors/jquery-3.6.0.js"></script>
     <script src="./scripts/client.js"></script>
     <link rel="stylesheet" href="./styles/stylesheet.css">
-    <link re;="stylesheet" href="./vendors/bootstrap.css">
+    <link rel="stylesheet" href="./vendors/bootstrap.css">
 </head>
+
 <body>
-    <h1>Let's Do Some Things!</h1>
+
+    <section id="inputs">
+        <h3>Add a New Note:</h3>
+        <input type="text" id="note" size="100">
+    </section>
+
+    <section id="container">
+        <table id="table" class="table table-hover">
+            <thead id="tableHead" >
+                <tr>
+                    <th scope="col">Task</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody id="list">
+
+            </tbody>
+        </table>
+    </section>
+
 </body>
+
 </html>
