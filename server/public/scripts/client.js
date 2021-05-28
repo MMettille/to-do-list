@@ -13,6 +13,7 @@ function clickListeners(){
     // ⬇ click listener for the addBtn
     $( '#addBtn' ).on('click', addTask);
     $( '#list' ).on('click', '#deleteBtn', deleteTask);
+    $( '#list' ).on('click', '#markAsCompleteBtn', toggleComplete);
 }
 
 function addTask(){
@@ -43,7 +44,6 @@ function deleteTask(){
     console.log('in deleteTask function');
     // ⬇ This grabs the data-id of the task we would like to delete
     let taskId = $(this).closest('tr').data('id');
-    
     // ⬇ This send the thing to be deleted to the server
     $.ajax({
         method: 'DELETE',
@@ -58,6 +58,34 @@ function deleteTask(){
 }
 
 // ⬇ This function will grab the information from the database
+function toggleComplete(){
+    console.log('in toggleComplete function');
+    // ⬇ This grabs the data-id of the task we would like to edit
+    let taskId = $(this).closest('tr').data('id');
+    // ⬇ This grabs the data-isComplete of the task we would like to edit
+    let status = $(this).closest('tr').data('isComplete')
+    // ⬇ This sets up the data we would like to send to the server
+    let data = {};
+    if(status === true){
+        data = {status}
+        $(this).closest('tr').addClass('complete')
+    } else {
+        data = {status};
+        $(this).closest('tr').removeClass();
+    }
+    $.ajax({
+        method: 'PUT',
+        url: `todo/${taskId}`,
+        data: data
+    }).then( response => {
+        console.log(`Toggled`);
+        // ⬇ Will refresh the DOM with the updated database containing the new information
+        refreshTasks();
+    }).catch( err => {
+        console.log(`Error Editing Tasks. Please try again later.`);
+    });
+}
+    // ⬇ This function will grab the information from the database
 function refreshTasks(){
     console.log('in getTasks function');
     // ⬇ This is the get request to the server
@@ -69,7 +97,7 @@ function refreshTasks(){
         // ⬇ This will call a function that will loop through the database and update the DOM
         renderTasks(response);
     }).catch( err => {
-        console.log('Error Refreshing Tasks. Please try again later');
+        console.log('Error Refreshing Tasks. Please try again later.');
     });
 }
 
