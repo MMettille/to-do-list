@@ -20,11 +20,13 @@ function addTask(){
     let task = {
         task: $('#note').val()
     };
+    // ⬇ Testing that I can get the task on client side - I can!
+    console.log(task);
     // ⬇ Sending the input to the server
     $.ajax({
         method: 'POST',
         url: '/todo',
-        data: 'task'
+        data: task
     }).then( response => {
         console.log(`Your task has been added`, response);
         // ⬇ Emptying the user input fields

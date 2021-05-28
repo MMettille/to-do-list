@@ -14,6 +14,11 @@ router.get('/', (req, res) => {
     });
 });
 
+//* POST REQUEST
+router.post('/', (req, res) => {
+    // ⬇ Testing that I can get the task on server side - I can!
+    console.log('req.body is ...', req.body);
+});
 
 
 
