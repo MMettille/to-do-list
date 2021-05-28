@@ -43,6 +43,12 @@ function deleteTask(){
     console.log('in deleteTask function');
     // ⬇ This grabs the data-id of the task we would like to delete
     let taskId = $(this).closest('tr').data('id');
+    
+    //! Troubleshooting -> my item is throwing a 500 server error.
+    console.log(taskId)
+    // Huh. That should have done it. My taskId is throwing undefined. I wonder if something is off with my data setter?
+    // HA! That was it. I had my data-id set as data=id. Whoops.
+
     // ⬇ This send the thing to be deleted to the server
     $.ajax({
         method: 'DELETE',
@@ -90,7 +96,7 @@ function renderTasks(toDo){
         }
         // ⬇ Set the data-id and data-isComplete here, to grab later in the put and delete request.
         $('#list').append(`
-        <tr data=id=${task.id} data-isComplete=${task.isComplete} class='${setClass}'>
+        <tr data-id=${task.id} data-isComplete=${task.isComplete} class='${setClass}'>
             <td>${task.taskName}</td>
             <td>${taskStatus}</td>
             <td><button id="markAsCompleteBtn">Mark As Complete</button></td>
