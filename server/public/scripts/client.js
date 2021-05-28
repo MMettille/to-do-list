@@ -12,10 +12,11 @@ function clickListeners(){
     console.log('in clickListeners function');
     // ⬇ click listener for the addBtn
     $( '#addBtn' ).on('click', addTask);
+    $( '#list' ).on('click', '#deleteBtn', deleteTask);
 }
 
 function addTask(){
-    console.log('in addTask function')
+    console.log('in addTask function');
     // ⬇ Grabbing the user's input
     let task = {
         task: $('#note').val()
@@ -34,8 +35,25 @@ function addTask(){
         // ⬇ Will refresh the DOM with the updated database containing the new information
         refreshTasks()
     }).catch( err => {
-        alert(`There was a problem adding your task. Please try again later`);
+        alert(`There was a problem adding your task. Please try again later.`);
     });
+}
+
+function deleteTask(){
+    console.log('in deleteTask function');
+    // ⬇ This grabs the data-id of the task we would like to delete
+    let taskId = $(this).closest('tr').data('id');
+    // ⬇ This send the thing to be deleted to the server
+    $.ajax({
+        method: 'DELETE',
+        url: `todo/${taskId}`
+    }).then( response => {
+        console.log(`Deleted!`);
+        // ⬇ Will refresh the DOM with the updated database containing the new information
+        refreshTasks();
+    }).catch( err => {
+        alert(`There was a problem deleting your task. Please try again later.`)
+    })
 }
 
 // ⬇ This function will grab the information from the database
@@ -75,7 +93,7 @@ function renderTasks(toDo){
         <tr data=id=${task.id} data-isComplete=${task.isComplete} class='${setClass}'>
             <td>${task.taskName}</td>
             <td>${taskStatus}</td>
-            <td><button id="markAsComplete">Mark As Complete</button></td>
+            <td><button id="markAsCompleteBtn">Mark As Complete</button></td>
             <td><button id="deleteBtn">DELETE</button></td>
         </tr>
         `);
