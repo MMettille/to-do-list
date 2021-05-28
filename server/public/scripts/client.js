@@ -16,12 +16,30 @@ function clickListeners(){
 
 function addTask(){
     console.log('in addTask function')
+    // ⬇ Grabbing the user's input
+    let task = {
+        task: $('#note').val()
+    };
+    // ⬇ Sending the input to the server
+    $.ajax({
+        method: 'POST',
+        url: '/todo',
+        data: 'task'
+    }).then( response => {
+        console.log(`Your task has been added`, response);
+        // ⬇ Emptying the user input fields
+        $('input').val('');
+        // ⬇ Will refresh the DOM with the updated database containing the new information
+        refreshTasks()
+    }).catch( err => {
+        alert(`There was a problem adding your task. Please try again later`);
+    });
 }
 
 // ⬇ This function will grab the information from the database
 function refreshTasks(){
     console.log('in getTasks function');
-    //TODO ⬇ get request
+    // ⬇ This is the get request to the server
     $.ajax({
         type: 'GET',
         url: '/todo'
@@ -30,7 +48,7 @@ function refreshTasks(){
         // ⬇ This will call a function that will loop through the database and update the DOM
         renderTasks(response);
     }).catch( err => {
-        alert('Error Refreshing Tasks. Please try again later');
+        console.log('Error Refreshing Tasks. Please try again later');
     });
 }
 
