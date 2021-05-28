@@ -25,12 +25,12 @@ router.post('/', (req, res) => {
     // ⬇ Inserting the user's input into the database
     pool.query (queryText, values)
     // ⬇ Sending back a created code to the user
-    .then( result =>
+    .then( result => {
         // ⬇ Checking to see what the result is
         console.log('Response from SQL', result);
         res.sendStatus(201);
-});
-
+        });
+    })
 
 
 
