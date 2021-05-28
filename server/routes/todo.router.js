@@ -50,6 +50,24 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+//* PUT METHOD
+router.put('/:id', (req, res) => {
+    // ⬇ This will grab the id of the task that we would like to delete
+    const taskId = req.params.id;
+    // ⬇ This tell the database what we'd like to edit and where
+    const queryText = `UPDATE "toDo" SET "isComplete" = NOT "isComplete" WHERE "toDo".id=$1;`;
+    // ⬇ Edit sanitized user input in the database
+    pool.query(queryText, [taskId])
+    // ⬇ Sending back a 'ok' code to the user
+    .then( result => {
+        console.log(`You edited...`, result);
+        res.sendStatus(200);
+    }).catch( err => {
+        console.log(`error editing on server side`);
+        res.sendStatus(500);
+    });
+})
+
 
 
 
