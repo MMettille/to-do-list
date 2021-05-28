@@ -5,7 +5,7 @@ function readyNow(){
     // ⬇ Establish click listeners
     clickListeners();
     // ⬇ Load existing tasks on page load:
-    getTasks();
+    refreshTasks();
 } // end readyNow function
 
 function clickListeners(){
@@ -18,7 +18,17 @@ function addTask(){
     console.log('in addTask function')
 }
 
-function getTasks(){
+// ⬇ This function will grab the information from the database
+function refreshTasks(){
     console.log('in getTasks function');
     //TODO ⬇ get request
+    $.ajax({
+        type: 'GET',
+        url: '/todo'
+    }).then( response => {
+        console.log(response);
+        // ⬇ This will call a function that will loop through the database and update the DOM
+        renderTasks();
+    })
 }
+
