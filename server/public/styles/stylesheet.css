@@ -17,6 +17,15 @@ h1 {
     padding: 10px;
 }
 
+#note {
+    font-size: 18pt;
+    width: 90%;
+}
+
+#addBtn{
+    margin-top: 10px;
+}
+
 #container {
     width: 98%;
     margin: 1%;
