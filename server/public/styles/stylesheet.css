@@ -34,3 +34,7 @@ h1 {
 thead, tbody, tfoot, tr, td, th {
     border-color: black;
 }
+
+.complete{
+    background-color: mediumseagreen;
+}
