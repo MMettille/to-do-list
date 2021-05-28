@@ -54,6 +54,7 @@ function refreshTasks(){
     });
 }
 
+// ⬇ This will modify everything on the DOM
 function renderTasks(toDo){
     console.log('in renderTasks function');
     // ⬇ This will empty the table of tasks
@@ -69,6 +70,7 @@ function renderTasks(toDo){
             taskStatus = `Let's do the thing!`
             setClass = 'notYetComplete'
         }
+        // ⬇ Set the data-id and data-isComplete here, to grab later in the put and delete request.
         $('#list').append(`
         <tr data=id=${task.id} data-isComplete=${task.isComplete} class='${setClass}'>
             <td>${task.taskName}</td>
