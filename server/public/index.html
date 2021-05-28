@@ -6,19 +6,24 @@
     <title>To Do List</title>
     <script src="./vendors/jquery-3.6.0.js"></script>
     <script src="./scripts/client.js"></script>
-    <link rel="stylesheet" href="./styles/stylesheet.css">
     <link rel="stylesheet" href="./vendors/bootstrap.css">
+    <link rel="stylesheet" href="./styles/stylesheet.css">
 </head>
 
 <body>
 
+    <header id="header">
+        <h1>Don't forget to:</h1>
+    </header>
+
     <section id="inputs">
-        <h3>Add a New Note:</h3>
-        <input type="text" id="note" size="100">
+        <h3>Brain Dump!</h3>
+        <input type="text" id="note" size="100" placeholder="Add a New Note...">
+        <button id="addBtn" class="btn btn-secondary">Add</button>
     </section>
 
     <section id="container">
-        <table id="table" class="table table-hover">
+        <table id="table" class="table table-hover table-striped">
             <thead id="tableHead" >
                 <tr>
                     <th scope="col">Task</th>
@@ -26,7 +31,24 @@
                 </tr>
             </thead>
             <tbody id="list">
-
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                  </tr>
             </tbody>
         </table>
     </section>
