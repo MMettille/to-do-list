@@ -10,7 +10,12 @@ function readyNow(){
 
 function clickListeners(){
     console.log('in clickListeners function');
-    //TODO ⬇ click listener for the addBtn
+    // ⬇ click listener for the addBtn
+    $( '#addBtn' ).on('click', addTask);
+}
+
+function addTask(){
+    console.log('in addTask function')
 }
 
 function getTasks(){
