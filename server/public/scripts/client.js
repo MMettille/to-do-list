@@ -14,13 +14,21 @@ function clickListeners(){
     $( '#addBtn' ).on('click', addTask);
     $( '#list' ).on('click', '#deleteBtn', deleteTask);
     $( '#list' ).on('click', '#markAsCompleteBtn', toggleComplete);
+    // ⬇ Click listener dropdown
+    $('.dropdown-toggle').dropdown();
+    // $('.dropdown-item').dropdown('update');
 }
 
 function addTask(){
     console.log('in addTask function');
     // ⬇ Grabbing the user's input
+    let priority = {
+        this: $('#priorityStatus option:selected').text()
+    }
+    
     let task = {
-        task: $('#note').val()
+        task: $('#note').val(),
+        priorityStatus: $('#priorityStatus option:selected').text()
     };
     // ⬇ Testing that I can get the task on client side - I can!
     console.log(task);
