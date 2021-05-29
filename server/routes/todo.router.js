@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
     // ⬇ Testing that I can get the task on server side - I can!
     console.log('req.body is ...', req.body);
     // ⬇ Telling the database WHAT we would like to do
-    let queryText = `INSERT INTO "toDo" ("taskName") VALUES ($1);`;
+    let queryText = `INSERT INTO "toDo" ("taskName", "priority") VALUES ($1, $2);`;
     // ⬇ Insert sanitized user input into the database
     let values = [req.body.task];
     // ⬇ Inserting the user's input into the database
