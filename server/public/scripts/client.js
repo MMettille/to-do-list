@@ -13,19 +13,19 @@ function clickListeners(){
     console.log('in clickListeners function');
     // ⬇ Click listener for the drop down stuff
     $( '.dropdown-toggle' ).dropdown();
-    // ⬇ Will let us know when it has been selected
+    // ⬇ Will let us know which drop down has been selected and separate it from the others
     $( '.dropdown-item' ).on('click', function() {
         $(this).siblings().removeClass("selected") //remove from others
         $(this).addClass("selected") //add selected to the one which clicked
         console.log($(".dropdown-item.selected").data("value"))
     })
-    // ⬇ click listener for the addBtn
+    // ⬇ click listener for the add button
     $( '#addBtn' ).on('click', addTask);
+    // ⬇ click listener for the delete button
     $( '#list' ).on('click', '#deleteBtn', deleteTask);
+    // ⬇ click listener for the complete button
     $( '#list' ).on('click', '#markAsCompleteBtn', toggleComplete);
 }
-
-//TODO Line 17 to 21 will AT LEAST allow me to specifically target on the button click. Now I need to figure out how to save and store into the addTask function
 
 function addTask(){
     console.log('in addTask function');
@@ -134,8 +134,8 @@ function renderTasks(toDo){
         $('#list').append(`
         <tr data-id=${task.id} data-isComplete=${task.isComplete} class='${setClass}'>
             <td>${task.taskName}</td>
-            <td>${taskStatus}</td>
             <td>${task.priority}</td>
+            <td>${taskStatus}</td>
             <td><button id="markAsCompleteBtn">Mark As Complete</button></td>
             <td><button id="deleteBtn">DELETE</button></td>
         </tr>
