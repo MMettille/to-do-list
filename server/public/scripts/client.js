@@ -130,6 +130,9 @@ function renderTasks(toDo){
             taskStatus = `Let's do the thing!` 
             setClass = 'notYetComplete'
         }
+        if(task.priority === null){
+            task.priority = '';
+        }
         // ⬇ Set the data-id and data-isComplete here, to grab later in the put and delete request.
         $('#list').append(`
         <tr data-id=${task.id} data-isComplete=${task.isComplete} class='${setClass}'>
