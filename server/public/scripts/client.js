@@ -14,11 +14,7 @@ function clickListeners(){
     // ⬇ Click listener for the drop down stuff
     $( '.dropdown-toggle' ).dropdown();
     // ⬇ Will let us know which drop down has been selected and separate it from the others
-    $( '.dropdown-item' ).on('click', function() {
-        $(this).siblings().removeClass("selected") //remove from others
-        $(this).addClass("selected") //add selected to the one which clicked
-        console.log($(".dropdown-item.selected").data("value"))
-    })
+    $( '.dropdown-item' ).on('click', dropDown);
     // ⬇ click listener for the add button
     $( '#addBtn' ).on('click', addTask);
     // ⬇ click listener for the delete button
@@ -144,4 +140,10 @@ function renderTasks(toDo){
         </tr>
         `);
     }
+}
+
+function dropDown(){
+        $(this).siblings().removeClass("selected") //remove from others
+        $(this).addClass("selected") //add selected to the one which clicked
+        console.log($(".dropdown-item.selected").data("value"))
 }
