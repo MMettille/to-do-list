@@ -6,24 +6,37 @@ function readyNow(){
     clickListeners();
     // ⬇ Load existing tasks on page load:
     refreshTasks();
+    
 } // end readyNow function
 
 function clickListeners(){
     console.log('in clickListeners function');
-    // ⬇ click listener for the addBtn
+    // ⬇ Click listener for the drop down stuff
+    $( '.dropdown-toggle' ).dropdown();
+    // ⬇ Will let us know which drop down has been selected and separate it from the others
+    $( '.dropdown-item' ).on('click', function() {
+        $(this).siblings().removeClass("selected") //remove from others
+        $(this).addClass("selected") //add selected to the one which clicked
+        console.log($(".dropdown-item.selected").data("value"))
+    })
+    // ⬇ click listener for the add button
     $( '#addBtn' ).on('click', addTask);
+    // ⬇ click listener for the delete button
     $( '#list' ).on('click', '#deleteBtn', deleteTask);
+    // ⬇ click listener for the complete button
     $( '#list' ).on('click', '#markAsCompleteBtn', toggleComplete);
 }
 
 function addTask(){
     console.log('in addTask function');
+    // ⬇ Grabbing the data of which selection the user made
+    let status = $('.dropdown-item.selected').data("value");
+    console.log(status)
     // ⬇ Grabbing the user's input
     let task = {
-        task: $('#note').val()
-    };
-    // ⬇ Testing that I can get the task on client side - I can!
-    console.log(task);
+        task: $('#note').val(),
+        priorityStatus: status
+    }
     // ⬇ Sending the input to the server
     $.ajax({
         method: 'POST',
@@ -114,13 +127,14 @@ function renderTasks(toDo){
             taskStatus = `You did the thing!`
             setClass = 'complete';
         } else {
-            taskStatus = `Let's do the thing!`
+            taskStatus = `Let's do the thing!` 
             setClass = 'notYetComplete'
         }
         // ⬇ Set the data-id and data-isComplete here, to grab later in the put and delete request.
         $('#list').append(`
         <tr data-id=${task.id} data-isComplete=${task.isComplete} class='${setClass}'>
             <td>${task.taskName}</td>
+            <td>${task.priority}</td>
             <td>${taskStatus}</td>
             <td><button id="markAsCompleteBtn">Mark As Complete</button></td>
             <td><button id="deleteBtn">DELETE</button></td>

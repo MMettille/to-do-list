@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>To Do List</title>
     <script src="./vendors/jquery-3.6.0.js"></script>
+    <script src="./vendors/bootstrap.bundle.js"></script>
     <script src="./scripts/client.js"></script>
     <link rel="stylesheet" href="./vendors/bootstrap.css">
     <link rel="stylesheet" href="./styles/stylesheet.css">
@@ -18,8 +19,27 @@
 
     <section id="inputs">
         <h3>Brain Dump!</h3>
-        <input type="text" id="note" value="" maxlength="200" placeholder="Add a New Note..."><br>
-        <button id="addBtn" class="btn btn-secondary">Add</button>
+        <form id="userInputs">
+            
+            <div>
+            <input type="text" id="note" value="" maxlength="200" placeholder="Add a New Note...">
+            </div>
+            
+            <div class="userButttons">
+                
+                    <button id="priorityStatus" class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+                    When do you Need to Do it?</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <option class="dropdown-item" href="#" data-value="Now">NOW</option>
+                        <option class="dropdown-item" href="#" data-value="Soon-ish"">Soon-ish</option>
+                        <option class="dropdown-item" href="#" data-value="Later">Later</option>
+                    </div>
+                    
+                <button id="addBtn" class="btn btn-secondary">Add</button>
+            
+            </div>
+
+        </form>
     </section>
 
     <section id="container">
@@ -27,6 +47,7 @@
             <thead id="tableHead" >
                 <tr>
                     <th scope="col">Task</th>
+                    <th scope="col">Priority</th>
                     <th scope="col">Status</th>
                     <th scope="col">Change Status</th>
                     <th scope="col">Delete</th>
