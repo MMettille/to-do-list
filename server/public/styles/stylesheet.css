@@ -22,10 +22,6 @@ h1 {
     width: 90%;
 }
 
-#addBtn{
-    margin-top: 10px;
-}
-
 #container {
     width: 98%;
     margin: 1%;
@@ -46,4 +42,8 @@ thead, tbody, tfoot, tr, td, th {
 
 .complete{
     background-color: mediumseagreen;
+}
+
+#priorityStatus, #addBtn {
+    margin: 15px;
 }

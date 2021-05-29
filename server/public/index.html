@@ -19,10 +19,14 @@
 
     <section id="inputs">
         <h3>Brain Dump!</h3>
-        <form>
-            <input type="text" id="note" value="" maxlength="200" placeholder="Add a New Note..."><br>
-            <div id="userButttons">
-                <div class="dropdown">
+        <form id="userInputs">
+            
+            <div>
+            <input type="text" id="note" value="" maxlength="200" placeholder="Add a New Note...">
+            </div>
+            
+            <div class="userButttons">
+                
                     <button id="priorityStatus" class="btn btn-secondary dropdown-toggle" type="button">
                     When do you Need to Do it?</button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -30,9 +34,11 @@
                         <option class="dropdown-item" href="#">Soon-ish</option>
                         <option class="dropdown-item" href="#">Later</option>
                     </div>
-                </div>
+                
                 <button id="addBtn" class="btn btn-secondary">Add</button>
+            
             </div>
+
         </form>
     </section>
 
