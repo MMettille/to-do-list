@@ -15,8 +15,6 @@ function clickListeners(){
     $( '.dropdown-toggle' ).dropdown();
     // ⬇ Will let us know which drop down has been selected and separate it from the others
     $( '.dropdown-item' ).on('click', dropDown);
-    // ⬇ Click listener for when the priority column is clicked
-    $( '#priorityCol' ).on('click', sortByCol);
     // ⬇ click listener for the add button
     $( '#addBtn' ).on('click', addTask);
     // ⬇ click listener for the delete button
@@ -31,7 +29,7 @@ function addTask(){
     let status = $('.dropdown-item.selected').data("value");
     console.log(status)
     // ⬇ If the user forgets to enter a note, it will prompt an little error
-    if($('note').val() === ''){
+    if($('#note').val() === ''){
         return;
     }
     // ⬇ Grabbing the user's input
@@ -150,16 +148,4 @@ function dropDown(){
         $(this).siblings().removeClass("selected") //remove from others
         $(this).addClass("selected") //add selected to the one which clicked
         console.log($(".dropdown-item.selected").data("value"))
-}
-
-function sortByCol(){
-    let table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = $('#table');
-    switching = true;
-    // ⬇ Setting the sorting to ascending
-    dir = "asc";
-    // ⬇ Make a loop that will continue until the switching is done
-    while (switching){
-
-    }
 }
