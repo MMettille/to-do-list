@@ -11,35 +11,43 @@ function readyNow(){
 
 function clickListeners(){
     console.log('in clickListeners function');
+    // ⬇ Click listener for the drop down stuff
+    $( '.dropdown-toggle' ).dropdown();
+    // ⬇ Will let us know when it has been selected
+    $( '.dropdown-item' ).on('click', function() {
+        $(this).siblings().removeClass("selected") //remove from others
+        $(this).addClass("selected") //add selected to the one which clicked
+        console.log($(".dropdown-item.selected").data("value"))
+    })
     // ⬇ click listener for the addBtn
     $( '#addBtn' ).on('click', addTask);
     $( '#list' ).on('click', '#deleteBtn', deleteTask);
     $( '#list' ).on('click', '#markAsCompleteBtn', toggleComplete);
-    // ⬇ Click listener for the drop down
-    $('.dropdown-toggle').dropdown();
-    // $('.dropdown-item').dropdown('update');
 }
 
 function addTask(){
     console.log('in addTask function');
+    // ⬇ Grabbing the data of which selection the user made
+    let status = $('.dropdown-item.selected').data("value");
+    console.log(`This task needs to be done... ${status}`)
     // ⬇ Grabbing the user's input
-    let task = {
-        task: $('#note').val(),
-    }
-    // ⬇ Sending the input to the server
-    $.ajax({
-        method: 'POST',
-        url: '/todo',
-        data: task
-    }).then( response => {
-        console.log(`Your task has been added`, response);
-        // ⬇ Emptying the user input fields
-        $('input').val('');
-        // ⬇ Will refresh the DOM with the updated database containing the new information
-        refreshTasks()
-    }).catch( err => {
-        alert(`There was a problem adding your task. Please try again later.`);
-    });
+    // let task = {
+    //     task: $('#note').val(),
+    // }
+    // // ⬇ Sending the input to the server
+    // $.ajax({
+    //     method: 'POST',
+    //     url: '/todo',
+    //     data: task
+    // }).then( response => {
+    //     console.log(`Your task has been added`, response);
+    //     // ⬇ Emptying the user input fields
+    //     $('input').val('');
+    //     // ⬇ Will refresh the DOM with the updated database containing the new information
+    //     refreshTasks()
+    // }).catch( err => {
+    //     alert(`There was a problem adding your task. Please try again later.`);
+    // });
 }
 
 function deleteTask(){
