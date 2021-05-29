@@ -6,6 +6,7 @@ function readyNow(){
     clickListeners();
     // ⬇ Load existing tasks on page load:
     refreshTasks();
+    
 } // end readyNow function
 
 function clickListeners(){
@@ -14,7 +15,7 @@ function clickListeners(){
     $( '#addBtn' ).on('click', addTask);
     $( '#list' ).on('click', '#deleteBtn', deleteTask);
     $( '#list' ).on('click', '#markAsCompleteBtn', toggleComplete);
-    // ⬇ Click listener dropdown
+    // ⬇ Click listener for the drop down
     $('.dropdown-toggle').dropdown();
     // $('.dropdown-item').dropdown('update');
 }
@@ -22,16 +23,9 @@ function clickListeners(){
 function addTask(){
     console.log('in addTask function');
     // ⬇ Grabbing the user's input
-    let priority = {
-        this: $('#priorityStatus option:selected').text()
-    }
-    
     let task = {
         task: $('#note').val(),
-        priorityStatus: $('#priorityStatus option:selected').text()
-    };
-    // ⬇ Testing that I can get the task on client side - I can!
-    console.log(task);
+    }
     // ⬇ Sending the input to the server
     $.ajax({
         method: 'POST',
@@ -130,6 +124,7 @@ function renderTasks(toDo){
         <tr data-id=${task.id} data-isComplete=${task.isComplete} class='${setClass}'>
             <td>${task.taskName}</td>
             <td>${taskStatus}</td>
+            <td>Updating...</td>
             <td><button id="markAsCompleteBtn">Mark As Complete</button></td>
             <td><button id="deleteBtn">DELETE</button></td>
         </tr>
