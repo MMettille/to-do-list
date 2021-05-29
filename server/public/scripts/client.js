@@ -28,6 +28,10 @@ function addTask(){
     // ⬇ Grabbing the data of which selection the user made
     let status = $('.dropdown-item.selected').data("value");
     console.log(status)
+    // ⬇ If the user forgets to enter a note, it will prompt an little error
+    if($('note').val() === ''){
+        return;
+    }
     // ⬇ Grabbing the user's input
     let task = {
         task: $('#note').val(),
