@@ -127,7 +127,7 @@ function renderTasks(toDo){
             taskStatus = `You did the thing!`
             setClass = 'complete';
         } else {
-            taskStatus = `Let's do the thing!`
+            taskStatus = `Let's do the thing!` 
             setClass = 'notYetComplete'
         }
         // ⬇ Set the data-id and data-isComplete here, to grab later in the put and delete request.
