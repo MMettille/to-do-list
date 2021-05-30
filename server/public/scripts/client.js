@@ -85,7 +85,6 @@ function deleteTask(){
 
 // ⬇ This function will grab the information from the database
 function toggleComplete(){
-    console.log('in toggleComplete')
     // ⬇ This grabs the data-id of the task we would like to edit
     let taskId = $(this).closest('tr').data('id');
     // ⬇ This grabs the data-isComplete of the task we would like to edit
@@ -169,7 +168,7 @@ function renderTasks(toDo){
         </tr>
         `);
         if(task.isComplete === true){
-            $(`#checkedBtn${task.id}`).prop('checked')
+            $(`#checkedBtn${task.id}`).prop('checked', true)
         }
     }
 }
@@ -177,8 +176,4 @@ function renderTasks(toDo){
 function dropDown(){
         $(this).siblings().removeClass("selected") //remove from others
         $(this).addClass("selected") //add selected to the one which clicked
-}
-
-function checkBox(){
-
 }
