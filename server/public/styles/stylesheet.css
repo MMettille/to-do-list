@@ -1,6 +1,8 @@
 body {
     text-align: center;
     background-color: powderblue;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
 }
 
 #header {
@@ -29,7 +31,6 @@ h1 {
 }
 
 #table {
-    text-align:center; 
     margin-left:auto; 
     margin-right:auto; 
     width: 80%;
@@ -42,6 +43,10 @@ thead, tbody, tfoot, tr, td, th {
 
 .complete{
     background-color: mediumseagreen;
+}
+
+.strikethrough {
+    text-decoration: line-through;
 }
 
 #priorityStatus, #addBtn {

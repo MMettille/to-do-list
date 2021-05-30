@@ -131,16 +131,16 @@ function renderTasks(toDo){
     console.log('in renderTasks function');
     // ⬇ This will empty the table of tasks
     $('#list').empty();
-    // ⬇ These two variables will grab the status of if the task has been complete and what class to assign
-    let taskStatus = '';
-    let setClass ='';
+    // ⬇ These three variables will grab the status of if the task has been complete and what class to assign
+    let setClass, setClassTwo, taskStatus ='';
     for (let task of toDo){
         if(task.isComplete === true){
             taskStatus = `You did the thing!`
             setClass = 'complete';
+            setClassTwo = 'strikethrough'
+            task.priority = '';
         } else {
-            taskStatus = `Let's do the thing!` 
-            setClass = 'notYetComplete'
+            taskStatus = `Let's do the thing!`
         }
         if(task.priority === null){
             task.priority = '';
@@ -148,11 +148,11 @@ function renderTasks(toDo){
         // ⬇ Set the data-id and data-isComplete here, to grab later in the put and delete request.
         $('#list').append(`
         <tr data-id=${task.id} data-isComplete=${task.isComplete} class='${setClass}'>
-            <td>${task.taskName}</td>
-            <td>${task.priority}</td>
-            <td>${taskStatus}</td>
-            <td><button id="markAsCompleteBtn" class="btn btn-secondary">Mark As Complete</button></td>
-            <td>
+            <td class='${setClassTwo} align-middle'>${task.taskName}</td>
+            <td class="align-middle">${task.priority}</td>
+            <td class="align-middle">${taskStatus}</td>
+            <td class="align-middle"><button id="markAsCompleteBtn" class="btn btn-secondary">Mark As Complete</button></td>
+            <td class="align-middle">
                 <button id="deleteBtn" class="btn btn-outline-danger">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
                         <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z"/>
