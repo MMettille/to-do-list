@@ -112,6 +112,10 @@ function refreshTasks(){
     });
 }
 
+function getPriorityList(toSearch) {
+    console.log('in getPriorityList')
+}
+
 // ⬇ This will modify everything on the DOM
 function renderTasks(toDo){
     console.log('in renderTasks function');
