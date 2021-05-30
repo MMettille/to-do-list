@@ -5,7 +5,7 @@ function readyNow(){
     clickListeners();
     // ⬇ Load existing tasks on page load:
     refreshTasks();
-    
+    // ⬇
 } // end readyNow function
 
 function clickListeners(){
@@ -52,16 +52,24 @@ function addTask(){
 function deleteTask(){
     // ⬇ This grabs the data-id of the task we would like to delete
     let taskId = $(this).closest('tr').data('id');
-    // ⬇ This send the thing to be deleted to the server
-    $.ajax({
-        method: 'DELETE',
-        url: `todo/${taskId}`
-    }).then( response => {
-        // ⬇ Will refresh the DOM with the updated database containing the new information
-        refreshTasks();
-    }).catch( err => {
-        alert(`There was a problem deleting your task. Please try again later.`)
+    // ⬇ Use Sweet Alerts to ask user to confirm that they'd like to delete the task
+    swal.fire({
+        title: "Are you sure?",
+        text: "This will permanently delete this task. There is no undoing this action.",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
     })
+    // // ⬇ This send the thing to be deleted to the server
+    // $.ajax({
+    //     method: 'DELETE',
+    //     url: `todo/${taskId}`
+    // }).then( response => {
+    //     // ⬇ Will refresh the DOM with the updated database containing the new information
+    //     refreshTasks();
+    // }).catch( err => {
+    //     alert(`There was a problem deleting your task. Please try again later.`)
+    // })
 }
 
 // ⬇ This function will grab the information from the database
