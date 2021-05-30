@@ -112,9 +112,19 @@ function refreshTasks(){
     });
 }
 
+// ⬇ This will sort through the priority and return what the user selected
 function getPriorityList(toSearch) {
     console.log('in getPriorityList')
-}
+    $.ajax({
+        type: 'GET',
+        url: `/todo/${toSearch}`
+    }).then( response => {
+        console.log(response);
+        renderTasks(response);
+    }).catch( err => {
+        console.log('Error getting selected tasks. Please try again later.')
+    })
+}   
 
 // ⬇ This will modify everything on the DOM
 function renderTasks(toDo){
