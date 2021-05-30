@@ -3,8 +3,9 @@ const router = express.Router();
 const pool = require('../modules/pool.js')
 
 //* GET REQUEST
+// Will get all of the tasks
 router.get('/', (req, res) => {
-    let queryText = 'SELECT * FROM "toDo" ORDER BY "id";';
+    let queryText = 'SELECT * FROM "toDo" ORDER BY "isComplete" ASC, "id" DESC;';
     pool.query(queryText).then( result => {
         // ⬇ Sends back the results in an object
         res.send(result.rows);
@@ -13,6 +14,21 @@ router.get('/', (req, res) => {
         res.sendStatus(500);
     });
 });
+
+// Will get tasks by priority
+router.get('/:id', (req, res) => {
+    // ⬇ This is the importance level the user selected
+    let priority = req.params.id;
+    let queryText = 'SELECT * FROM "toDo" WHERE "priority" = $1 ORDER BY "isComplete" ASC, "id" DESC;';
+    pool.query(queryText, [priority])
+    .then( result => {
+        console.log( result )
+        res.send(result.rows);
+    }).catch( err => {
+        console.log( 'Error getting tasks from database', error )
+        res.sendStatus(500);
+    });
+})
 
 //* POST REQUEST
 router.post('/', (req, res) => {
