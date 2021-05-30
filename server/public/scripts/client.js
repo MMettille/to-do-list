@@ -169,6 +169,7 @@ function renderTasks(toDo){
                 </button></td>
         </tr>
         `);
+        // ⬇ After we append the list, the computer will search for the id where the isComplete task 
         if(task.isComplete === true){
             $(`#checkedBtn${task.id}`).prop('checked', true)
         }
