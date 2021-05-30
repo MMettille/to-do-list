@@ -19,7 +19,7 @@ function clickListeners(){
     // ⬇ click listener for the delete button
     $( '#list' ).on('click', '#deleteBtn', deleteTask);
     // ⬇ click listener for the complete button
-    $( '#list' ).on('click', '#markAsCompleteBtn', toggleComplete);
+    $( '#list' ).on('click', '.checkedBtn', toggleComplete);
 }
 
 function addTask(){
@@ -85,6 +85,7 @@ function deleteTask(){
 
 // ⬇ This function will grab the information from the database
 function toggleComplete(){
+    console.log('in toggleComplete')
     // ⬇ This grabs the data-id of the task we would like to edit
     let taskId = $(this).closest('tr').data('id');
     // ⬇ This grabs the data-isComplete of the task we would like to edit
@@ -138,13 +139,14 @@ function renderTasks(toDo){
     // ⬇ This will empty the table of tasks
     $('#list').empty();
     // ⬇ These three variables will grab the status of if the task has been complete and what class to assign
-    let setClass, setClassTwo, taskStatus ='';
+    let setClass, setClassTwo, taskStatus, isItChecked='';
     for (let task of toDo){
         if(task.isComplete === true){
             taskStatus = `You did the thing!`
             setClass = 'complete';
             setClassTwo = 'strikethrough'
             task.priority = '';
+            isItChecked = checked="checked";
         } else {
             taskStatus = `Let's do the thing!`
         }
@@ -157,7 +159,7 @@ function renderTasks(toDo){
             <td class='${setClassTwo} align-middle'>${task.taskName}</td>
             <td class="align-middle">${task.priority}</td>
             <td class="align-middle">${taskStatus}</td>
-            <td class="align-middle"><button id="markAsCompleteBtn" class="btn btn-secondary">Mark As Complete</button></td>
+                <td class="align-middle"><input class="form-check-input checkedBtn" type="checkbox" value="" id="checkedBtn${task.id}"></input></td>
             <td class="align-middle">
                 <button id="deleteBtn" class="btn btn-outline-danger">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
@@ -166,10 +168,17 @@ function renderTasks(toDo){
                 </button></td>
         </tr>
         `);
+        if(task.isComplete === true){
+            $(`#checkedBtn${task.id}`).prop('checked')
+        }
     }
 }
 
 function dropDown(){
         $(this).siblings().removeClass("selected") //remove from others
         $(this).addClass("selected") //add selected to the one which clicked
+}
+
+function checkBox(){
+
 }
