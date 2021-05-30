@@ -128,6 +128,8 @@ function getPriorityList(toSearch) {
         url: `/todo/${toSearch}`
     }).then( response => {
         renderTasks(response);
+        // ⬇ This will automatically close the dropdown menu when you click an item
+        $(this).closest(".dropdown-menu").prev().dropdown("toggle");
     }).catch( err => {
         console.log('Error getting selected tasks. Please try again later.')
     })
@@ -174,6 +176,9 @@ function renderTasks(toDo){
 }
 
 function dropDown(){
-        $(this).siblings().removeClass("selected") //remove from others
-        $(this).addClass("selected") //add selected to the one which clicked
+        // ⬇ These two lines will diferenciate the clicked item from the others, so we can grab it later.
+        $(this).siblings().removeClass("selected");
+        $(this).addClass("selected");
+        // ⬇ This will automatically close the dropdown menu when you click an item
+        $(this).closest(".dropdown-menu").prev().dropdown("toggle");
 }
