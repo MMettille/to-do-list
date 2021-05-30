@@ -1,7 +1,6 @@
 $(document).ready(readyNow);
 
 function readyNow(){
-    console.log('jQuery is working, it is safe to manipulate the DOM');
     // ⬇ Establish click listeners
     clickListeners();
     // ⬇ Load existing tasks on page load:
@@ -24,10 +23,8 @@ function clickListeners(){
 }
 
 function addTask(){
-    console.log('in addTask function');
     // ⬇ Grabbing the data of which selection the user made
     let status = $('.dropdown-item.selected').data("value");
-    console.log(status)
     // ⬇ If the user forgets to enter a note, it will prompt an little error
     if($('#note').val() === ''){
         return;
@@ -43,7 +40,6 @@ function addTask(){
         url: '/todo',
         data: task
     }).then( response => {
-        console.log(`Your task has been added`, response);
         // ⬇ Emptying the user input fields
         $('input').val('');
         // ⬇ Will refresh the DOM with the updated database containing the new information
@@ -54,7 +50,6 @@ function addTask(){
 }
 
 function deleteTask(){
-    console.log('in deleteTask function');
     // ⬇ This grabs the data-id of the task we would like to delete
     let taskId = $(this).closest('tr').data('id');
     // ⬇ This send the thing to be deleted to the server
@@ -62,7 +57,6 @@ function deleteTask(){
         method: 'DELETE',
         url: `todo/${taskId}`
     }).then( response => {
-        console.log(`Deleted!`);
         // ⬇ Will refresh the DOM with the updated database containing the new information
         refreshTasks();
     }).catch( err => {
@@ -72,7 +66,6 @@ function deleteTask(){
 
 // ⬇ This function will grab the information from the database
 function toggleComplete(){
-    console.log('in toggleComplete function');
     // ⬇ This grabs the data-id of the task we would like to edit
     let taskId = $(this).closest('tr').data('id');
     // ⬇ This grabs the data-isComplete of the task we would like to edit
@@ -89,7 +82,6 @@ function toggleComplete(){
         url: `todo/${taskId}`,
         data: data
     }).then( response => {
-        console.log(`Toggled`);
         // ⬇ Will refresh the DOM with the updated database containing the new information
         refreshTasks();
     }).catch( err => {
@@ -98,13 +90,11 @@ function toggleComplete(){
 }
     // ⬇ This function will grab the information from the database
 function refreshTasks(){
-    console.log('in getTasks function');
     // ⬇ This is the get request to the server
     $.ajax({
         type: 'GET',
         url: '/todo'
     }).then( response => {
-        console.log(response);
         // ⬇ This will call a function that will loop through the database and update the DOM
         renderTasks(response);
     }).catch( err => {
@@ -114,12 +104,10 @@ function refreshTasks(){
 
 // ⬇ This will sort through the priority and return what the user selected
 function getPriorityList(toSearch) {
-    console.log('in getPriorityList')
     $.ajax({
         type: 'GET',
         url: `/todo/${toSearch}`
     }).then( response => {
-        console.log(response);
         renderTasks(response);
     }).catch( err => {
         console.log('Error getting selected tasks. Please try again later.')
@@ -128,7 +116,6 @@ function getPriorityList(toSearch) {
 
 // ⬇ This will modify everything on the DOM
 function renderTasks(toDo){
-    console.log('in renderTasks function');
     // ⬇ This will empty the table of tasks
     $('#list').empty();
     // ⬇ These three variables will grab the status of if the task has been complete and what class to assign
@@ -166,5 +153,4 @@ function renderTasks(toDo){
 function dropDown(){
         $(this).siblings().removeClass("selected") //remove from others
         $(this).addClass("selected") //add selected to the one which clicked
-        console.log($(".dropdown-item.selected").data("value"))
 }
