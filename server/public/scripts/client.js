@@ -61,18 +61,27 @@ function deleteTask(){
         showCancelButton: true,
         confirmButtonColor: '#ff8080',
         confirmButtonText: 'Yes, delete it!',
-    }).then
-    // // ⬇ This send the thing to be deleted to the server
-    // $.ajax({
-    //     method: 'DELETE',
-    //     url: `todo/${taskId}`
-    // }).then( response => {
-    //     // ⬇ Will refresh the DOM with the updated database containing the new information
-    //     refreshTasks();
-    // }).catch( err => {
-    //     alert(`There was a problem deleting your task. Please try again later.`)
-    // })
-}
+    }).then( result => {
+        if (result.value) {
+            // User confirmed that they wanted to delete the item
+                $.ajax({
+                method: 'DELETE',
+                url: `todo/${taskId}`
+            }).then( response => {
+                // Confirms to the user that it was deleted
+                swal.fire(
+                    'Deleted!',
+                    'Your item has been deleted.',
+                    'success'
+                )
+                // ⬇ Will refresh the DOM with the updated database containing the new information
+                refreshTasks();
+                }).catch( err => {
+                    alert(`There was a problem deleting your task. Please try again later.`)
+                });
+        } // Nothing happens if the user decides not to delete
+    })
+} // end deleteTask
 
 // ⬇ This function will grab the information from the database
 function toggleComplete(){
