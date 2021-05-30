@@ -1,4 +1,4 @@
-# jQuery Salary Calculator
+# Full Stack To-do List
 
 ## Description
 
