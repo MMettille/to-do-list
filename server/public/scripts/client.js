@@ -57,9 +57,11 @@ function deleteTask(){
         title: "Are you sure?",
         text: "This will permanently delete this task. There is no undoing this action.",
         icon: "warning",
-        buttons: true,
-        dangerMode: true
-    })
+        dangerMode: true,
+        showCancelButton: true,
+        confirmButtonColor: '#ff8080',
+        confirmButtonText: 'Yes, delete it!',
+    }).then
     // // ⬇ This send the thing to be deleted to the server
     // $.ajax({
     //     method: 'DELETE',
