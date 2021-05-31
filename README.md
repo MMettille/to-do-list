@@ -1,4 +1,4 @@
-# jQuery Salary Calculator
+# Full Stack To-do List
 
 ## Description
 
@@ -11,6 +11,12 @@ To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](TBD)
 ## Screen Shot
 
 
+## Installation
+- Create a database named to-do-list,
+- The queries in the database.sql file are set up to create all the necessary tables that you will need to have this app work correctly. The project is built on Postgres, so you will need to make sure to have that installed. I would recommend using Postico to run those queries as that was used to create the queries.
+- Open up your editor of choice and run an "npm install"
+- Run "npm start" in your terminal
+- Open localhost:5000 in your browser and enjoy the app!
 
 ## Built With
 
