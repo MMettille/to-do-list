@@ -22,9 +22,8 @@ function clickListeners(){
     $( '#list' ).on('click', '.checkedBtn', toggleComplete);
 }
 
+// ⬇ This function adds a task to the database
 function addTask(){
-    // ⬇ Grabbing the data of which selection the user made
-    let status = $('.dropdown-item.selected').data("value");
     // ⬇ If the user forgets to enter a note, it will prompt an little error
     if($('#note').val() === ''){
         return;
@@ -32,7 +31,7 @@ function addTask(){
     // ⬇ Grabbing the user's input
     let task = {
         task: $('#note').val(),
-        priorityStatus: status
+        priorityStatus: $('.dropdown-item.selected').data("value")
     }
     // ⬇ Sending the input to the server
     $.ajax({
@@ -49,6 +48,7 @@ function addTask(){
     });
 }
 
+// ⬇ This function will delete a task from the database
 function deleteTask(){
     // ⬇ This grabs the data-id of the task we would like to delete
     let taskId = $(this).closest('tr').data('id');
@@ -83,23 +83,16 @@ function deleteTask(){
     })
 } // end deleteTask
 
-// ⬇ This function will grab the information from the database
+// ⬇ This function will edit the complete status
 function toggleComplete(){
     // ⬇ This grabs the data-id of the task we would like to edit
     let taskId = $(this).closest('tr').data('id');
     // ⬇ This grabs the data-isComplete of the task we would like to edit
     let status = $(this).closest('tr').data('isComplete')
-    // ⬇ This sets up the data we would like to send to the server
-    let data = {};
-    if(status === true){
-        data = {status}
-    } else {
-        data = {status};
-    }
     $.ajax({
         method: 'PUT',
         url: `todo/${taskId}`,
-        data: data
+        data: status
     }).then( response => {
         // ⬇ Will refresh the DOM with the updated database containing the new information
         refreshTasks();
@@ -107,19 +100,7 @@ function toggleComplete(){
         console.log(`Error Editing Tasks. Please try again later.`);
     });
 }
-    // ⬇ This function will grab the information from the database
-function refreshTasks(){
-    // ⬇ This is the get request to the server
-    $.ajax({
-        type: 'GET',
-        url: '/todo'
-    }).then( response => {
-        // ⬇ This will call a function that will loop through the database and update the DOM
-        renderTasks(response);
-    }).catch( err => {
-        console.log('Error Refreshing Tasks. Please try again later.');
-    });
-}
+
 
 // ⬇ This will sort through the priority and return what the user selected
 function getPriorityList(toSearch) {
@@ -134,6 +115,20 @@ function getPriorityList(toSearch) {
         console.log('Error getting selected tasks. Please try again later.')
     })
 }   
+
+// ⬇ This function will grab the information from the database
+function refreshTasks(){
+    // ⬇ This is the get request to the server
+    $.ajax({
+        type: 'GET',
+        url: '/todo'
+    }).then( response => {
+        // ⬇ This will call a function that will loop through the database and update the DOM
+        renderTasks(response);
+    }).catch( err => {
+        console.log('Error Refreshing Tasks. Please try again later.');
+    });
+}
 
 // ⬇ This will modify everything on the DOM
 function renderTasks(toDo){
