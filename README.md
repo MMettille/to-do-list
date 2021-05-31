@@ -2,7 +2,7 @@
 
 ## Description
 
-_Duration: TBD Day Sprint_
+_Duration: 3 Day Sprint_
 
 A to-do list to track the things you do not want to forget!
 
