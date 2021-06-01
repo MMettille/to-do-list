@@ -9,8 +9,7 @@ A to-do list to track the things you do not want to forget!
 To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](https://mmettille-to-do-list.herokuapp.com/)
 
 ## Screen Shot
-![Image of a blue and green to-do list]
-(./photo.png)
+![Image of a blue and green to-do list](./photo.png)
 
 ## Installation
 - Create a database named to-do-list,
